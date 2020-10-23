@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-. /etc/environment
+
+# Load the PATH environment AND location for pm2
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/nvm/versions/node/v12.18.2/bin"
 
 # Set required variables
 export VERSIONS_DIR="/var/www/versions"
@@ -65,6 +67,8 @@ applicationStart() {
         echo -e "- ERROR: Application: ApplicationStart failed!\n"
         exit 1
     fi
+    # Make PM2 start as service at system boot
+    env PATH=$PATH:/usr/local/nvm/versions/node/v12.18.2/bin /usr/local/nvm/versions/node/v12.18.2/lib/node_modules/pm2/bin/pm2 startup systemd -u gitlab --hp /home/gitlab
 }
 
 cleanTemp() {
