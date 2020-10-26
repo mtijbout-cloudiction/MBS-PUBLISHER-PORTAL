@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Load the PATH environment AND location for pm2
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/nvm/versions/node/v12.18.2/bin"
+. /etc/environment
 
 # Set required variables
 export VERSIONS_DIR="/var/www/versions"
