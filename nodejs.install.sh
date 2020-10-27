@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+# Let's begin ...
+echo -e "\n\nStart processing $0"
+
 # Become root
+echo -e "\nBecome root for this exercise ..."
 [ `whoami` = root ] || exec su -c $0 root
 
 # Fix tput empty terminal error
@@ -23,12 +27,14 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-# Check if user gitlab exists
+# Check if user for gitlab deployments exists
+echo -e "\nCheck if user ${GITLAB_USER} exists:"
 exists=$(grep -c "^${GITLAB_USER}:" /etc/passwd)
-if [ $exists -ne 0 ]; then
-    echo -e "\nThe user ${GITLAB_USER} does not exist.\nERROR: Abort installation. First create user and try again"
+if [ $exists -ne 1 ]; then
+    echo -e "- The user ${GITLAB_USER} does not exist.\n- ERROR: Abort installation. First create user and try again"
+    exit 1
 else
-    echo -e "\nThe user ${GITLAB_USER} exists.\nContinue installation ...\n"
+    echo -e "- The user ${GITLAB_USER} exists.\n- Continue installation ...\n"
 fi
 
 # Create directory for global nvm installation
@@ -62,21 +68,28 @@ cp "${DIR}"/deploy.sh /home/gitlab/deploy.sh
 chmod 700 /home/gitlab/deploy.sh
 
 # Enable SUDO for this command
-cat /etc/sudoers | grep gitlab > /dev/null 2>&1
+echo -e "\nSet sudo permissions for user ${GITLAB_USER}"
+cat /etc/sudoers | grep ${GITLAB_USER} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo -e "SUDO permissions for user gitlab already set."
+    echo -e "- sudo permissions for user ${GITLAB_USER} already set."
 else
-    echo -e "Set SUDO permissions for user gitlab."
-    # Make backup of existing active sudoers file.
+    echo -e "- Set SUDO permissions for user gitlab."
+    echo -e "- Make backup of existing active sudoers file ..."
     cp /etc/sudoers /etc/sudoers.bak-${DATETIME}
 
+    echo -e "- Make modifications to sudoers file ..."
     # Insert INS_STRING after INS_LOC location
     INS_LOC="# User privilege specification"
-    INS_STRING='gitlab    '$(hostname)' = NOPASSWD: /home/gitlab/deploy.sh'
+    INS_STRING=${GITLAB_USER}'    '$(hostname)' = NOPASSWD: /home/'${GITLAB_USER}'/deploy.sh'
     # Add line after the search string INS_LOC
     sed -i '/'"${INS_LOC}"'/a '"${INS_STRING}" /etc/sudoers
 fi
 
 # Some checks:
-cat /etc/sudoers
-ls -l /home/gitlab/deploy.sh
+
+# echo -e "\nShow the contents of /etc/passwd:\n"
+# cat /etc/sudoers
+# ls -l /home/gitlab/deploy.sh
+
+# The End ...
+echo -e "\nFinished processing $0\n\n"
