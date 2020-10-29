@@ -30,3 +30,4 @@ This script enables 4NET to deploy their applications on the specific host in a 
 deploy.sh accepts arguments:  
 * --version <gitlab build number>
 * --cleanup
+
