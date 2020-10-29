@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version: 20201028-2132
+# Version: 20201029-1000
 
 # Let's begin ...
 echo -e "\n\nStart processing $0"
@@ -101,14 +101,13 @@ cleanEnvironment() {
     rm -f $SOURCE_FILE
 
     echo -e "\n- Remove old application versions from ${VERSIONS_DIR}\n"
-    VERSIONS_DIR=/var/www/test-versions
     echo -e "  - Build array of version directories..."
     VERSIONS_LIST=( $(cat ${VERSIONS_DIR}/versions.list) )
     echo -e "  - Total list: \n${VERSIONS_LIST[@]}\n"
     echo -e "  - Total number items in array: ${#VERSIONS_LIST[@]}\n"
 
     # Specify the number of last versions to keep e.g. 3= keep last 3 versions.
-    KEEP_VERSIONS=3
+    KEEP_VERSIONS=2     # 2= current and 1 previous version
     echo -e "\n  - Versions to keep: ${KEEP_VERSIONS}"
     # Remove the last item, times the specified number to keep.
     for ((i=1;i<=KEEP_VERSIONS;i++)); do
@@ -125,6 +124,11 @@ cleanEnvironment() {
         echo -e "  - Removing directory $VER_DIR"
         rm -fr ${VERSIONS_DIR}/${VER_DIR}
     done
+
+    echo -e "\nUpating the versions.list file ..."
+    cd ${VERSIONS_DIR}
+    ls -d */ | cut -f1 -d'/' > versions.list
+
     echo -e "\n- Finished removing old version directories."
 }
 
