@@ -1,6 +1,17 @@
 # MBS-PUBLISHER-PORTAL
 This repository contains the files required by the installation and configuration of the NodeJS and mp2 environment.
 
+## Table of contents
+- [MBS-PUBLISHER-PORTAL](#mbs-publisher-portal)
+  - [Table of contents](#table-of-contents)
+  - [Installation procedure](#installation-procedure)
+  - [Files in this repostory](#files-in-this-repostory)
+    - [vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env](#vars-service-name-dtap-vm-xxenv)
+    - [main.sh](#mainsh)
+    - [nodejs-install.env](#nodejs-installenv)
+    - [nodejs.install.sh](#nodejsinstallsh)
+    - [deploy.sh](#deploysh)
+    - [setSSHEnv.sh](#setsshenvsh)
 
 ## Installation procedure
 
@@ -80,4 +91,6 @@ deploy.sh accepts 2 arguments:
 
 `--cleanup` This parameter is looked for by the script to tell if the environment needs to be cleaned. If set, the function `cleanEnvironment` will be called. It will remove any old versions except for the current and second last version.
 
+
+### setSSHEnv.sh
 
