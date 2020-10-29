@@ -1,7 +1,7 @@
 # MBS-PUBLISHER-PORTAL
 This repository contains the files required by the installation and configuration of the NodeJS and mp2 environment.
 
-## Installation order
+## Installation procedure
 
 To install a system that is ready to receive the application packages deployed by 4NET using gitlab the following steps need to be taken:
 
@@ -33,17 +33,6 @@ This environment file holds all details required for knowing what hosts are targ
 
 This is the script that trigges the installation / configuraiton process. It has all steps in the required order. Steps can be skipped by commenting these steps out.
 
-### deploy.
-This script enables 4NET to deploy their applications on the specific host in a controlled manner. This script is installed in the homedirectory of the user `gitlab`. This is a non-privileged user. It can only do 1 command with sudo to get privileges: `/home/gitlab/deploy.sh`. Nothing more. 4NET has made the integration to their GitLab deployment procedure to call this script.
-
-deploy.sh accepts 2 arguments:  
-* --version <gitlab build number> (Mandatory)
-* --cleanup (Optional)
-
-`--version` The job number from the gitlab runner is passed to this argument and identified by the `--version` parameter. The script will look for the argument behind --version and processes this as the version number required by the deployment process of the script.
-
-`--cleanup` This parameter is looked for by the script to tell if the environment needs to be cleaned. If set, the function `cleanEnvironment` will be called. It will remove any old versions except for the current and second last version.
-
 The current order of steps:
 
 1. Creating a scripts directory to store all scripts
@@ -54,6 +43,17 @@ The current order of steps:
 6. Install the deployment mechanism for gitlab
 7. Enable usage of the SSHD environment file
 8. Fill the SSHD environment file
+
+### deploy.
+This script enables 4NET to deploy their applications on the specific host in a controlled manner. This script is installed in the homedirectory of the user `gitlab`. This is a non-privileged user. It can only do 1 command with sudo to get privileges: `/home/gitlab/deploy.sh`. Nothing more. 4NET has made the integration to their GitLab deployment procedure to call this script.
+
+deploy.sh accepts 2 arguments:  
+* --version <gitlab build number> (Mandatory)
+* --cleanup (Optional)
+
+`--version` The job number from the gitlab runner is passed to this argument and identified by the `--version` parameter. The script will look for the argument behind --version and processes this as the version number required by the deployment process of the script.
+
+`--cleanup` This parameter is looked for by the script to tell if the environment needs to be cleaned. If set, the function `cleanEnvironment` will be called. It will remove any old versions except for the current and second last version.
 
 ### nodejs-install.env
 
