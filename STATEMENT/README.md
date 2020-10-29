@@ -19,16 +19,28 @@ To install a system that is ready to receive the application packages deployed b
 
 | File Name | Description |
 | --- | --- |
+| README.md | This documentation file. |
 | deploy.sh | Deployment script file used by the gitlab runner. |
+| enableSSHEnv.sh | Script to configure SSH to use environment files. |
+| installDeploy.sh | Script to install / update the deploy.sh script |
+| main.sh | The installation script that executes the task at hand. |
 | nodejs-install.env | Environment file with details required for the installation. |
 | nodejs.install.sh | Installation script to install NodeJS and mp2. |
-| vars-\<SERVICE-NAME-DTAP(VM-xx)\>.env | Environment file with specifics required about the targeted systems. |
-| main.sh | The installation script that executes the task at hand. |
+| setSSHEnv.sh | Script used to fill the environment files used by SSH with the latest details |
+| vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env | Environment file with specifics required about the targeted systems. |
 
 
-### vars-\<SERVICE-NAME-DTAP(VM-xx)\>.env
+### vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env
 
 This environment file holds all details required for knowing what hosts are targeted for installation and a list of files that need to be transferred to thes hosts. These details are requird for the script `main.sh`.
+
+These environment files can be used for a whole Service or for an indivitual machine, depending on the need and if an Application Resource Group already exists and in use.
+
+Naming of files:
+
+* `vars-MBS-STATEMENT-TEST-VM-01.env` > Details specific for the machine `MBS-STATEMENT-TEST-VM-01`
+* vars-MBS-STATEMENT.env > Contains information for TEST, ACC, PROD and it's machines.
+
 
 ### main.sh
 
