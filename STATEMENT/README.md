@@ -15,7 +15,6 @@ This repository contains the files required by the installation and configuratio
     - [enableSSHEnv.sh](#enablesshenvsh)
     - [setSSHEnv.sh](#setsshenvsh)
 
-The scripts / files will be discussed in logical oder below. Not alphabetical as in the table.
 
 ## Installation procedure
 
@@ -35,7 +34,7 @@ To install a system that is ready to receive the application packages deployed b
 | File Name | Description |
 | --- | --- |
 | README.md | This documentation file. |
-| deploy.sh | Deployment script file used by the gitlab runner. |
+| deploy.sh](#deploysh) | Deployment script file used by the gitlab runner. |
 | [enableSSHEnv.sh](#enablesshenvsh) | Script to configure SSH to use environment files. |
 | [installDeploy.sh](#installdeploysh) | Script to install / update the deploy.sh script |
 | [main.sh](#mainsh) | The installation script that executes the task at hand. |
@@ -44,6 +43,7 @@ To install a system that is ready to receive the application packages deployed b
 | [setSSHEnv.sh](#setsshenvsh) | Script used to fill the environment files used by SSH with the latest details |
 | [vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env](#vars-service-name-dtap-vm-xxenv) | Environment file with specifics required about the targeted systems. |
 
+The scripts / files will be discussed in logical oder below. Not alphabetical as in the table.
 
 ### vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env
 
