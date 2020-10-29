@@ -5,15 +5,13 @@ Thisrepository contains the files required by the installation and configuration
 
 ### List of files
 
-| Type / Order of Execution | File Name | Description |
-| --- | --- | --- |
+| Type / Order | File Name | Description |
+| :---: | --- | --- |
 | source file | deploy.sh | Deployment script file used by the gitlab runner. |
 | source file | nodejs-install.env | Environment file with details required for the installation. |
 | source file | nodejs.install.sh | Installation script to install NodeJS and mp2. |
 | 01 | vars-MBS-PUBLISHER-PORTAL.env | Environment file with specifics required about the targeted systems. |
 | 02 | main.sh | The installation script that executes the task at hand. |
-
-
 
 
 #### nodejs-install.env
