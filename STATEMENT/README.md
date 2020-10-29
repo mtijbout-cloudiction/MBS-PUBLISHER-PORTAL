@@ -11,6 +11,7 @@ This repository contains the files required by the installation and configuratio
     - [nodejs-install.env](#nodejs-installenv)
     - [nodejs.install.sh](#nodejsinstallsh)
     - [deploy.sh](#deploysh)
+    - [enableSSHEnv.sh](#enablesshenvsh)
     - [setSSHEnv.sh](#setsshenvsh)
 
 ## Installation procedure
@@ -91,6 +92,9 @@ deploy.sh accepts 2 arguments:
 
 `--cleanup` This parameter is looked for by the script to tell if the environment needs to be cleaned. If set, the function `cleanEnvironment` will be called. It will remove any old versions except for the current and second last version.
 
+### enableSSHEnv.sh
+
+This script configures the SSH server (sshd_conf) to use environment files for non-interactive shells used by  executing a command remotely via ssh. When you login to a terminal with ssh user@host, it is called an interactive shell and for that user the whole profile is loaded. This is not the case with non-interactive shells.
 
 ### setSSHEnv.sh
 
