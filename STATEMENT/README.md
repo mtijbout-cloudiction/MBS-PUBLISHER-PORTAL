@@ -94,3 +94,10 @@ deploy.sh accepts 2 arguments:
 
 ### setSSHEnv.sh
 
+This script fills the environment file(s) used by the SSH server, enabled by the script `enableSSHEnv.sh`.
+
+What it does is:
+
+* It reads the current version of NVM (Mandatory)
+* Fills the environment file for the gitlab user as specified in `nodejs-install.env` (Mandatory)
+* Fills the environment file in the /etc/skel template folder used by the system to create (future) new users (Optional)
