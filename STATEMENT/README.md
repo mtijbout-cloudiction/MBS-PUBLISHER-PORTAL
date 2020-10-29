@@ -16,19 +16,11 @@ Thisrepository contains the files required by the installation and configuration
 
 ### vars-\<Service-Name\>.env
 
-This environment file holds all details required to know what hosts are targeted for installation and a list of files that need to be transferred to thes hosts. These details are requird for the script `main.sh`.
+This environment file holds all details required for knowing what hosts are targeted for installation and a list of files that need to be transferred to thes hosts. These details are requird for the script `main.sh`.
 
 ### main.sh
 
 This is the script that trigges the installation / configuraiton process. It has all steps in the required order. Steps can be skipped by commenting these steps out.
-
-### nodejs-install.env
-
-This file contains all parameters that are required to install specific versions of NodeJS and pm2.
-
-### nodejs.install.sh
-
-The installation script that installs NodeJS, pm2 and configures the deployment possibility for the user gitlab used by 4NET.
 
 ### deploy.sh
 
@@ -42,4 +34,21 @@ deploy.sh accepts 2 arguments:
 
 `--cleanup` This parameter is looked for by the script to tell if the environment needs to be cleaned. If set, the function `cleanEnvironment` will be called. It will remove any old versions except for the current and second last version.
 
-### 
+The current order of steps:
+
+1. Creating a scripts directory to store all scripts
+2. Copy the specified files over to the scripts directory
+3. Make the scripts exacutable
+4. List what is in the scripts directory
+4. Start the NodeJS installation
+6. Install the deployment mechanism for gitlab
+7. Enable usage of the SSHD environment file
+8. Fill the SSHD environment file
+
+### nodejs-install.env
+
+This file contains all parameters that are required to install specific versions of NodeJS and pm2.
+
+### nodejs.install.sh
+
+The installation script that installs NodeJS and pm2 using the specific versions specified in `nodejs-install.env`.
