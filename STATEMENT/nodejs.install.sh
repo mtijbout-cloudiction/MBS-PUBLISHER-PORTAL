@@ -63,8 +63,12 @@ echo -e "Install node.js version ${NJSVERSION}"
 nvm install ${NJSVERSION}
 
 # Install pm2
-echo -e $PM2VERSION
+echo -e "- Install pm2 version: $PM2VERSION"
 npm install -g pm2@${PM2VERSION} # -g to install package globally
+
+# Install Puppeteer
+echo -e "- Install puppeteer version: $PUPPETEERVER"
+npm install puppeteer@${PUPPETEERVER} -g --unsafe-perm=true # -g to install package globally
 
 # The End ...
 echo -e "\nFinished processing $0\n\n"

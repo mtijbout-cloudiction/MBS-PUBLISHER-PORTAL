@@ -1,9 +1,20 @@
 # MBS-PUBLISHER-PORTAL
-Thisrepository contains the files required by the installation and configuration of the NodeJS and mp2 environment.
+This repository contains the files required by the installation and configuration of the NodeJS and mp2 environment.
+
+## Installation order
+
+To install a system that is ready to receive the application packages deployed by 4NET using gitlab the following steps need to be taken:
+
+1. Install an Ubuntu virtual machine
+2. On the SSHMGR server using the sshmgr.sh tool:
+   1. Create a user gitlab on the virtual machine
+   2. Make certificates for the user gitlab
+   3. Install the authorized_keys file on the virtual machine
+   4. Enable the certificate based access on the virtual machine
+3. Install the application platform on the virtual machine using the scripts in this repository
 
 
-
-## List of files
+## Files in this repostory
 
 | Type / Order | File Name | Description |
 | :---: | --- | --- |
@@ -22,8 +33,7 @@ This environment file holds all details required for knowing what hosts are targ
 
 This is the script that trigges the installation / configuraiton process. It has all steps in the required order. Steps can be skipped by commenting these steps out.
 
-### deploy.sh
-
+### deploy.
 This script enables 4NET to deploy their applications on the specific host in a controlled manner. This script is installed in the homedirectory of the user `gitlab`. This is a non-privileged user. It can only do 1 command with sudo to get privileges: `/home/gitlab/deploy.sh`. Nothing more. 4NET has made the integration to their GitLab deployment procedure to call this script.
 
 deploy.sh accepts 2 arguments:  
