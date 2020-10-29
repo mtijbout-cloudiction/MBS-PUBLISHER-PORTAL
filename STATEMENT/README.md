@@ -80,4 +80,4 @@ deploy.sh accepts 2 arguments:
 
 `--cleanup` This parameter is looked for by the script to tell if the environment needs to be cleaned. If set, the function `cleanEnvironment` will be called. It will remove any old versions except for the current and second last version.
 
-
+Woops
