@@ -15,6 +15,7 @@ This repository contains the files required by the installation and configuratio
     - [enableSSHEnv.sh](#enablesshenvsh)
     - [setSSHEnv.sh](#setsshenvsh)
 
+The scripts / files will be discussed in logical oder below. Not alphabetical as in the table.
 
 ## Installation procedure
 
