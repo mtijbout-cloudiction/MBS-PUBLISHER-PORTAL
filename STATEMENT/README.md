@@ -14,7 +14,7 @@ Thisrepository contains the files required by the installation and configuration
 | 02 | main.sh | The installation script that executes the task at hand. |
 
 
-### vars-<Service-Name>.env
+### vars-\<Service-Name\>.env
 
 This environment file holds all details required to know what hosts are targeted for installation and a list of files that need to be transferred to thes hosts. These details are requird for the script `main.sh`.
 
