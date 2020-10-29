@@ -24,4 +24,9 @@ The installation script that installs NodeJS, pm2 and configures the deployment 
 
 #### deploy.sh
 
-This script enables 4NET to deploy their applications on the specific host in a controlled manner. This script is installed in the homedirectory of the user `gitlab`. This is a non-privileged user. It can only do 1 command with sudo to get privileges: `/home/gitlab/deploy.sh`. Nothing more. 
+This script enables 4NET to deploy their applications on the specific host in a controlled manner. This script is installed in the homedirectory of the user `gitlab`. This is a non-privileged user. It can only do 1 command with sudo to get privileges: `/home/gitlab/deploy.sh`. Nothing more.  
+4NET has made the integration to their GitLab deployment procedure to call this script.
+
+deploy.sh accepts arguments:  
+* --version <gitlab build number>
+* --cleanup
