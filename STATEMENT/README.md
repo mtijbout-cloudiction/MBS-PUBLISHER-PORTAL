@@ -36,12 +36,12 @@ To install a system that is ready to receive the application packages deployed b
 | README.md | This documentation file. |
 | deploy.sh | Deployment script file used by the gitlab runner. |
 | [enableSSHEnv.sh](#enablesshenvsh) | Script to configure SSH to use environment files. |
-| installDeploy.sh | Script to install / update the deploy.sh script |
+| [installDeploy.sh](#installdeploysh) | Script to install / update the deploy.sh script |
 | [main.sh](#mainsh) | The installation script that executes the task at hand. |
 | [nodejs-install.env](#nodejs-installenv) | Environment file with details required for the installation. |
 | [nodejs.install.sh](#nodejsinstallsh) | Installation script to install NodeJS and mp2. |
 | [setSSHEnv.sh](#setsshenvsh) | Script used to fill the environment files used by SSH with the latest details |
-| vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env | Environment file with specifics required about the targeted systems. |
+| [vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env](#vars-service-name-dtap-vm-xxenv) | Environment file with specifics required about the targeted systems. |
 
 
 ### vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env
