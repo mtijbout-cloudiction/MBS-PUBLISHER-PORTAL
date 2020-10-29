@@ -1,10 +1,11 @@
-# MBS-PUBLISHER-PORTAL
+# MBS-STATEMENT-SERVICE
 This repository contains the files required by the installation and configuration of the NodeJS and mp2 environment.
 
 ## Table of contents
-- [MBS-PUBLISHER-PORTAL](#mbs-publisher-portal)
+- [MBS-STATEMENT-SERVICE](#mbs-statement-service)
   - [Table of contents](#table-of-contents)
   - [Installation procedure](#installation-procedure)
+  - [Installation syntax](#installation-syntax)
   - [Files in this repostory](#files-in-this-repostory)
     - [vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env](#vars-service-name-dtap-vm-xxenv)
     - [main.sh](#mainsh)
@@ -12,8 +13,10 @@ This repository contains the files required by the installation and configuratio
     - [nodejs.install.sh](#nodejsinstallsh)
     - [installDeploy.sh](#installdeploysh)
     - [deploy.sh](#deploysh)
+      - [deploy.sh syntax](#deploysh-syntax)
     - [enableSSHEnv.sh](#enablesshenvsh)
     - [setSSHEnv.sh](#setsshenvsh)
+  - [Folder codedeploy](#folder-codedeploy)
 
 
 ## Installation procedure
@@ -28,13 +31,20 @@ To install a system that is ready to receive the application packages deployed b
    4. Enable the certificate based access on the virtual machine
 3. Install the application platform on the virtual machine using the scripts in this repository
 
+## Installation syntax
+
+When all environment files are filled with details this is the command to execute:
+
+```bash
+./main.sh vars-MBS-STATEMENT-SERVICE-TEST-VM-01.env
+```
 
 ## Files in this repostory
 
 | File Name | Description |
 | --- | --- |
 | README.md | This documentation file. |
-| deploy.sh](#deploysh) | Deployment script file used by the gitlab runner. |
+| [deploy.sh](#deploysh) | Deployment script file used by the gitlab runner. |
 | [enableSSHEnv.sh](#enablesshenvsh) | Script to configure SSH to use environment files. |
 | [installDeploy.sh](#installdeploysh) | Script to install / update the deploy.sh script |
 | [main.sh](#mainsh) | The installation script that executes the task at hand. |
@@ -45,6 +55,7 @@ To install a system that is ready to receive the application packages deployed b
 
 The scripts / files will be discussed in logical oder below. Not alphabetical as in the table.
 
+
 ### vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env
 
 This environment file holds all details required for knowing what hosts are targeted for installation and a list of files that need to be transferred to thes hosts. These details are requird for the script `main.sh`.
@@ -54,7 +65,7 @@ These environment files can be used for a whole Service or for an indivitual mac
 Naming of files:
 
 * `vars-MBS-STATEMENT-TEST-VM-01.env` > Details specific for the machine `MBS-STATEMENT-TEST-VM-01`
-* vars-MBS-STATEMENT.env > Contains information for TEST, ACC, PROD and it's machines.
+* `vars-MBS-STATEMENT.env` > Contains information for TEST, ACC, PROD and it's machines.
 
 
 ### main.sh
@@ -97,16 +108,24 @@ Result is that only Cloudiction can alter the contents of the deploy.sh script a
 This is the script that enables 4NET to deploy their applications on the specific host in a controlled manner. 4NET has made the integration to their GitLab deployment procedure to call this script.
 
 deploy.sh accepts 2 arguments:  
-* --version <gitlab build number> (Mandatory)
-* --cleanup (Optional)
+* --version \<gitlab build number\> - *Mandatory*
+* --cleanup - *Optional*
 
 `--version` The job number from the gitlab runner is passed to this argument and identified by the `--version` parameter. The script will look for the argument behind --version and processes this as the version number required by the deployment process of the script.
 
 `--cleanup` This parameter is looked for by the script to tell if the environment needs to be cleaned. If set, the function `cleanEnvironment` will be called. It will remove any old versions except for the current and second last version.
 
+#### deploy.sh syntax
+
+The syntax used for using the `deploy.sh` script is:
+
+```bash
+/home/gitlab/deploy.sh --version <gitlab build number> --cleanup
+```
+
 ### enableSSHEnv.sh
 
-This script configures the SSH server (sshd_conf) to use environment files for non-interactive shells used by  executing a command remotely via ssh. When you login to a terminal with ssh user@host, it is called an interactive shell and for that user the whole profile is loaded. This is not the case with non-interactive shells.
+This script configures the SSH server (sshd_conf) to use environment files for non-interactive shells used by  executing a command remotely via ssh. When you login to a terminal with `ssh user@host`, it is called an interactive shell and for that user the whole profile is loaded. This is not the case with non-interactive shells.
 
 ### setSSHEnv.sh
 
@@ -114,6 +133,14 @@ This script fills the environment file(s) used by the SSH server, enabled by the
 
 What it does is:
 
-* It reads the current version of NVM (Mandatory)
-* Fills the environment file for the gitlab user as specified in `nodejs-install.env` (Mandatory)
-* Fills the environment file in the /etc/skel template folder used by the system to create (future) new users (Optional)
+* It reads the current version of NVM - *Mandatory*
+* Fills the environment file for the gitlab user as specified in `nodejs-install.env` - *Mandatory*
+* Fills the environment file in the `/etc/skel` template folder used by the system to create (future) new users - *Optional*
+
+## Folder codedeploy
+
+| File Name | Description |
+| --- | --- |
+| MoveSource.sh | The script that moves the extracted application package into the right place. This script is maintained by 4NET.  It has some specifics in it to make it work, so it is stored here for future reference. |
+| Start.sh | The script that reloads the application configuration with pm2 and starts the new configuration. This script is maintained by 4NET.  It has some specifics in it to make it work, so it is stored here for future reference. |
+
