@@ -10,9 +10,11 @@ This repository contains the files required by the installation and configuratio
     - [main.sh](#mainsh)
     - [nodejs-install.env](#nodejs-installenv)
     - [nodejs.install.sh](#nodejsinstallsh)
+    - [installDeploy.sh](#installdeploysh)
     - [deploy.sh](#deploysh)
     - [enableSSHEnv.sh](#enablesshenvsh)
     - [setSSHEnv.sh](#setsshenvsh)
+
 
 ## Installation procedure
 
@@ -33,12 +35,12 @@ To install a system that is ready to receive the application packages deployed b
 | --- | --- |
 | README.md | This documentation file. |
 | deploy.sh | Deployment script file used by the gitlab runner. |
-| enableSSHEnv.sh | Script to configure SSH to use environment files. |
+| [enableSSHEnv.sh](#enablesshenvsh) | Script to configure SSH to use environment files. |
 | installDeploy.sh | Script to install / update the deploy.sh script |
-| main.sh | The installation script that executes the task at hand. |
-| nodejs-install.env | Environment file with details required for the installation. |
-| nodejs.install.sh | Installation script to install NodeJS and mp2. |
-| setSSHEnv.sh | Script used to fill the environment files used by SSH with the latest details |
+| [main.sh](#mainsh) | The installation script that executes the task at hand. |
+| [nodejs-install.env](#nodejs-installenv) | Environment file with details required for the installation. |
+| [nodejs.install.sh](#nodejsinstallsh) | Installation script to install NodeJS and mp2. |
+| [setSSHEnv.sh](#setsshenvsh) | Script used to fill the environment files used by SSH with the latest details |
 | vars-\<SERVICE-NAME-DTAP(-VM-xx)\>.env | Environment file with specifics required about the targeted systems. |
 
 
@@ -80,9 +82,18 @@ This file contains all parameters that are required to install specific versions
 The installation script that installs NodeJS and pm2 using the specific versions specified in `nodejs-install.env`.
 
 
+### installDeploy.sh
+
+This script configures the capability for a service account, in this case the account gitlab, to deploy application packages from gitlab.
+
+The script assumes that the account is already created on the system. It will install a script in the homedirectory of the account and secure it with permissions. Next it will edit the sudoers file to limit the sudo capabilities to only this one command with elevated privileges (e.g. sudo) for this account. It can only do 1 command with sudo to get privileges: `/home/gitlab/deploy.sh`. Nothing more.
+
+Result is that only Cloudiction can alter the contents of the deploy.sh script and that the service account cannot start any other commands with elevated privileges.
+
+
 ### deploy.sh
 
-This script enables 4NET to deploy their applications on the specific host in a controlled manner. This script is installed in the homedirectory of the user `gitlab`. This is a non-privileged user. It can only do 1 command with sudo to get privileges: `/home/gitlab/deploy.sh`. Nothing more. 4NET has made the integration to their GitLab deployment procedure to call this script.
+This is the script that enables 4NET to deploy their applications on the specific host in a controlled manner. 4NET has made the integration to their GitLab deployment procedure to call this script.
 
 deploy.sh accepts 2 arguments:  
 * --version <gitlab build number> (Mandatory)
