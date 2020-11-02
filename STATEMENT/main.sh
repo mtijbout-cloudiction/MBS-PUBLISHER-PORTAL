@@ -50,8 +50,8 @@ do
     echo -e "\n- Install delploy.sh ..."
     ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/installDeploy.sh
 
-    # echo -e "\n- Add NVM to PATH ..."
-    # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/modEnv.sh
+    echo -e "\n- Add NVM to PATH ..."
+    ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/modEnv.sh
 
     # echo -e "\n- Enable usage of ~/.ssh/environment file ..."
     # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/enableSSHEnv.sh
