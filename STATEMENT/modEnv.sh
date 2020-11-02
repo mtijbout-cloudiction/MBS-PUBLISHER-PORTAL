@@ -13,7 +13,7 @@ DATETIME=`date +%Y%m%d_%H%M%S`
 # Define some base details
 ETC_ENV_FILE="/etc/environment"
 NVM_VER=$(sudo cat /usr/local/nvm/alias/default)    # Retrieve current NVM version
-NVM_BASE=":/usr/local/nvm/versions/node/v"
+NVM_BASE=":/usr/local/nvm/versions/node/v"    # What to look for if already something is configured
 NVM_PATH="${NVM_BASE}${NVM_VER}/bin"    # Generate NVM path tree
 
 fnMakeBackup() {
