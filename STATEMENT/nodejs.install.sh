@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version: 20201028-1707
+# Version: 20201102-1312
 #
 # Installation of the deploy.sh file is moved to a separate script: installDeploy.sh
 
@@ -65,6 +65,9 @@ nvm install ${NJSVERSION}
 # Install pm2
 echo -e "- Install pm2 version: $PM2VERSION"
 npm install -g pm2@${PM2VERSION} # -g to install package globally
+
+# Install dependency for Puppeteer: chromium browser
+sudo apt update && sudo apt install -y chromium-browser
 
 # Install Puppeteer
 echo -e "- Install puppeteer version: $PUPPETEERVER"
