@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version: 20201029-1000
+# Version: 20201111-1250
 
 # Let's begin ...
 echo -e "\n\nStart processing $0"
@@ -132,21 +132,11 @@ cleanEnvironment() {
     echo -e "\n- Finished removing old version directories."
 }
 
-# Process the --cleanup argument.
-echo -e "\nCheck if argument --cleanup is provided to cleanup the deployments"
-case "${1}" in
-    "--cleanup")
-        echo -e "- Order for cleanup is given. Start processing ..."
-        cleanEnvironment
-        ;;
-esac
-
-
 # Order of functions to call
 moveSource
 applicationStop
 applicationStart
-# cleanEnvironment
+cleanEnvironment
 
 # The End ...
 echo -e "\nFinished processing $0\n\n"
