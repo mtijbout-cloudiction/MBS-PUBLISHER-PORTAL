@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-# Run script as SUDO
+## BEGIN CHECK SCRIPT RUNNING UNDER SUDO
+[ "$EUID" -eq 0 ] || echo -e "\nYou must be root to run this script! \nuse 'sudo !!' \n" && exit 1
 
+# Set some parameters
 export VERSIONS_DIR="/var/www/versions"
 export CURRENT_LINK="/var/www/current"
 export SOURCE_DIR="/tmp/application"
