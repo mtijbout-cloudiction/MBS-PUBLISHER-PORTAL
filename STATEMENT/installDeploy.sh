@@ -44,3 +44,6 @@ else
     # Add line after the search string INS_LOC
     sed -i '/'"${INS_LOC}"'/a '"${INS_STRING}" /etc/sudoers
 fi
+
+# The End ...
+echo -e "\nFinished processing $0\n\n"

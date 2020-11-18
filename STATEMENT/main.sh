@@ -7,6 +7,9 @@
 # on a system that has NodeJS already installed, white testing it does not need 
 # installed ove and over again.
 
+# Let's begin ...
+echo -e "\n\nStart processing $0"
+
 
 # Check if an environment file is supplied on the command line.
 if [ $# -eq 0 ]
@@ -41,8 +44,11 @@ do
     echo -e "\n- Make the script files executable ..."
     ssh ${ADMIN}@$i chmod +x /home/${USER}/scripts/*.sh
 
-    echo -e "\n- See what is in the scripts folder:"
-    ssh ${ADMIN}@$i ls -l /home/${USER}/scripts/
+    # echo -e "\n- See what is in the scripts folder:"
+    # ssh ${ADMIN}@$i ls -l /home/${USER}/scripts/
+
+    echo -e "\n- Setting the timezone ..."
+    ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/systemMods.sh
 
     # echo -e "\n- Start the nodejs installation ..."
     # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/nodejs.install.sh
@@ -59,3 +65,6 @@ do
     # echo -e "\n- Fill ~/.ssh/environment file ..."
     # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/setSSHEnv.sh
 done
+
+# The End ...
+echo -e "\nFinished processing $0\n\n"
