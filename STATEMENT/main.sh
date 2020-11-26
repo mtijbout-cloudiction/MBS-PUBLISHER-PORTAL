@@ -47,11 +47,11 @@ do
     # echo -e "\n- See what is in the scripts folder:"
     # ssh ${ADMIN}@$i ls -l /home/${USER}/scripts/
 
-    echo -e "\n- Setting the timezone ..."
-    ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/systemMods.sh
+    # echo -e "\n- Setting the timezone ..."
+    # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/systemMods.sh
 
-    # echo -e "\n- Start the nodejs installation ..."
-    # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/nodejs.install.sh
+    echo -e "\n- Start the nodejs installation ..."
+    ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/nodejs.install.sh
 
     # echo -e "\n- Install delploy.sh ..."
     # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/installDeploy.sh
