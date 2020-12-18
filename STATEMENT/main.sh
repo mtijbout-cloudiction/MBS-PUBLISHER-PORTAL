@@ -37,7 +37,7 @@ do
     # echo -e "- Create the scripts folder ..."
     # ssh ${ADMIN}@$i mkdir -p /home/${USER}/scripts
 
-    echo -e "\n- Copy over the files ..."
+    echo -e "\n- Copy over the files:"
     # Copy all files over as listed in the array FILES (from env file)
     scp -C -i ${SSH_ID} ${FILES[@]} ${USER}@${i}:~/scripts
 
@@ -47,14 +47,14 @@ do
     # echo -e "\n- See what is in the scripts folder:"
     # ssh ${ADMIN}@$i ls -l /home/${USER}/scripts/
 
-    # echo -e "\n- Setting the timezone ..."
-    # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/systemMods.sh
+    echo -e "\n- Make some required system modifications ..."
+    ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/systemMods.sh
 
     # echo -e "\n- Start the nodejs installation ..."
     # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/nodejs.install.sh
 
-    echo -e "\n- Install delploy.sh ..."
-    ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/installDeploy.sh
+    # echo -e "\n- Install delploy.sh ..."
+    # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/installDeploy.sh
 
     # echo -e "\n- Add NVM to PATH ..."
     # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/modEnv.sh
