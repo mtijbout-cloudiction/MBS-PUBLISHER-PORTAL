@@ -50,11 +50,11 @@ do
     # echo -e "\n- Setting the timezone ..."
     # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/systemMods.sh
 
-    echo -e "\n- Start the nodejs installation ..."
-    ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/nodejs.install.sh
+    # echo -e "\n- Start the nodejs installation ..."
+    # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/nodejs.install.sh
 
-    # echo -e "\n- Install delploy.sh ..."
-    # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/installDeploy.sh
+    echo -e "\n- Install delploy.sh ..."
+    ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/installDeploy.sh
 
     # echo -e "\n- Add NVM to PATH ..."
     # ssh ${ADMIN}@$i sudo /home/cloudiction/scripts/modEnv.sh

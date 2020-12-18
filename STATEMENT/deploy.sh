@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Version: 20201111-1250
+# Version: 20201214-1008
 
 # Let's begin ...
 echo -e "\n\nStart processing $0"
@@ -8,12 +8,11 @@ echo -e "\n\nStart processing $0"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Load environment settings:
-echo -e "\nLoading environment settings from: "${HOME}"/.ssh/environment"
-. "${HOME}"/.ssh/environment
+#echo -e "\nLoading environment settings from: "${HOME}"/.ssh/environment"
+#. "${HOME}"/.ssh/environment
 
 # Load the PATH environment AND location for pm2
-# Environment now provided by SSHD 
-#. /etc/environment
+. /etc/environment
 echo -e "\n- The PATH is configured to:\n  $PATH"
 
 echo -e "\nSet required variables ..."
