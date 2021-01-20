@@ -55,6 +55,7 @@ fnTestAct() {
         # Set path for NVM
     else # [ $? -eq 0 ]; then
         echo -e "- No path for a NVM version is set, update ..."
+        fnMakeBackup ${ETC_ENV_FILE}
         fnAddNVMVersion
     fi
 }
