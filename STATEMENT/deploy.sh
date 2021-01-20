@@ -57,7 +57,9 @@ moveSource() {
 
 applicationStop() {
     echo -e "\nExecute: ApplicationStop:"
-    source $CODEDEPLOY_DIR/ApplicationStop/Stop.sh
+    # Stopping application by stopping service
+    systemctl restart pm2-gitlab.service
+    systemctl is-active --quiet pm2-gitlab.service
     if [ $? -eq 0 ]; then
         echo -e "\n- Application: ApplicationStop successfully completed.\n"
     else
@@ -79,16 +81,18 @@ applicationStart() {
     fi
     # Change ownership to gitlab user
     chown gitlab:gitlab -R ${VERSIONS_DIR}/${DEPL_VER}
+
     # Call start script from application codebase
-    source $CODEDEPLOY_DIR/ApplicationStart/Start.sh
-    if [ $? -eq 0 ]; then
-        echo -e "\n- Application: ApplicationStart successfully completed.\n"
+    # source $CODEDEPLOY_DIR/ApplicationStart/Start.sh
+    # Start application by restarting service
+    systemctl restart pm2-gitlab.service
+    systemctl is-active --quiet pm2-gitlab.service
+    if [ $? -eq 1 ]; then
+        echo -e "\n- Application: ApplicationStop successfully completed.\n"
     else
-        echo -e "- ERROR: Application: ApplicationStart failed!\n"
+        echo -e "- ERROR: Application stop failed!\n"
         exit 1
     fi
-    echo -e "\nMake PM2 start as service at system boot ..."
-    env PATH=$PATH:/usr/local/nvm/versions/node/v12.18.2/bin /usr/local/nvm/versions/node/v12.18.2/lib/node_modules/pm2/bin/pm2 startup systemd -u gitlab --hp /home/gitlab
 }
 
 cleanEnvironment() {
@@ -133,7 +137,7 @@ cleanEnvironment() {
 
 # Order of functions to call
 moveSource
-applicationStop
+#applicationStop
 applicationStart
 cleanEnvironment
 

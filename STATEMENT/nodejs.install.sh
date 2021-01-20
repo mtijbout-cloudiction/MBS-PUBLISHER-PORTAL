@@ -77,5 +77,13 @@ npm install -g yarn@${YARNVERSION}
 # echo -e "- Install puppeteer version: $PUPPETEERVER"
 # npm install puppeteer@${PUPPETEERVER} -g --unsafe-perm=true # -g to install package globally
 
+    echo -e "\nMake PM2 start as service at system boot ..."
+    # Copy custom service file pm2-gitlab.service
+    cp $DIR/pm2-gitlab.service /etc/systemd/system
+    # Enable service
+    systemctl daemon-reload
+    systemctl enable pm2-gitlab.service
+
+
 # The End ...
 echo -e "\nFinished processing $0\n\n"

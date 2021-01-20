@@ -1,0 +1,21 @@
+[Unit]
+Description=PM2 process manager
+Documentation=https://pm2.keymetrics.io/
+After=network.target
+
+[Service]
+Type=forking
+User=gitlab
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/nvm/versions/node/v12.18.2/bin:/usr/local/nvm/versions/node/v12.18.2/bin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+Environment=PM2_HOME=/home/gitlab/.pm2
+Restart=on-failure
+
+ExecStart=/var/www/current/codedeploy/ApplicationStart/Start.sh
+ExecReload=/var/www/current/codedeploy/ApplicationStart/Start.sh
+ExecStop=/var/www/current/codedeploy/ApplicationStop/Stop.sh
+
+[Install]
+WantedBy=multi-user.target
